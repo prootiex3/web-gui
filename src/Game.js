@@ -11,12 +11,18 @@ class GameOptions {
 	constructor(game) {
 		this.#game = game;
 		this.guiScale = 0;
+		this.maxFps = 60;
 	}
 
 	/**
 	 * @type {number}
 	 */
 	guiScale;
+
+	/**
+	 * @type {number}
+	 */
+	maxFps;
 }
 
 class Game {
@@ -42,7 +48,13 @@ class Game {
 	 * @private
 	 * @type {number | null}
 	 */
-	#last_call_time = null;
+	#then = null;
+
+	/**
+	 * @private
+	 * @type {number | null}
+	 */
+	#lastTime = null;
 
 	/**
 	 * @private
@@ -55,6 +67,18 @@ class Game {
 	 * @type {boolean}
 	 */
 	#running = true;
+
+	/**
+	 * @private
+	 * @type {number}
+	 */
+	#lastRenderTime = 0;
+
+	/**
+	 * @private
+	 * @type {number}
+	 */
+	#interval = null;
 
 	/**
 	 * @param {HTMLCanvasElement} canvas
@@ -109,18 +133,29 @@ class Game {
 		if (bool) this.run();
 	}
 
-	render() {
-		const delta = (performance.now() - this.#last_call_time) / 1000;
-		this.#last_call_time = performance.now();
-		this.#fps = Math.floor(1 / delta);
+	render(timestamp) {
+		// figure out fps
+		const sp = (timestamp - this.#lastRenderTime) / 1000;
+		this.#lastRenderTime = timestamp;
+		this.#fps = Math.round(1 / sp);
+
+		// render n stuff
 		this.#renderer.update();
-		this.#currentScreen?.render();
 		this.#currentScreen?.update();
-		if (this.#running) requestAnimationFrame(this.render.bind(this));
+		this.#currentScreen?.render();
+
+		if (!this.#running) return;
+
+		clearTimeout(this.#interval);
+		this.#interval = setInterval(
+			this.render.bind(this),
+			1000 / this.#options.maxFps,
+			performance.now()
+		);
 	}
 
 	run() {
-		this.render();
+		this.render(performance.now());
 	}
 
 	#setEventHandlers() {

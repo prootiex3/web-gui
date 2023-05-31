@@ -63,6 +63,20 @@ class Renderer {
 	}
 
 	/**
+	 * @param {'left' | 'center' | 'right'} alignment
+	 */
+	getTextAlignment(alignment) {
+		this.#context.textAlign = alignment;
+	}
+
+	/**
+	 * @returns {('left' | 'center' | 'right') | null}
+	 */
+	getTextAlignment() {
+		return this.#context?.textAlign ?? null;
+	}
+
+	/**
 	 * @param {number} x
 	 * @param {number} y
 	 * @param {number} width

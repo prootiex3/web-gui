@@ -22,15 +22,14 @@ class Screen extends WindowEventHandler {
 
 	render() {
 		const renderer = this.#game.getRenderer();
-		const context = renderer.getContext();
-		context.fillStyle = "black";
-		context.fillRect(0, 0, renderer.getWidth(), renderer.getHeight());
-		context.fillStyle = "red";
+		renderer.setFillStyle("black");
+		renderer.fillRect(0, 0, renderer.getWidth(), renderer.getHeight());
+		renderer.setFillStyle("red");
 		const fontSize =
 			renderer.getScale() * (this.#game.getOptions().guiScale + 1);
-		context.font = `${fontSize}px Arial`;
-		context.textAlign = `left`;
-		context.fillText(`${this.#game.getFPS()} FPS`, 0, fontSize / 1.3);
+		renderer.setFont(`${fontSize}px Arial`);
+		renderer.getTextAlignment(`left`);
+		renderer.fillText(`${this.#game.getFPS()} FPS`, 0, fontSize / 1.3);
 	}
 
 	update() {}
