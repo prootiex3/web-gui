@@ -35,6 +35,54 @@ class Renderer {
 	}
 
 	/**
+	 * @param {string} fillStyle
+	 */
+	setFillStyle(fillStyle) {
+		this.#context.fillStyle = fillStyle;
+	}
+
+	/**
+	 * @returns {string | null}
+	 */
+	getFillStyle() {
+		return this.#context?.fillStyle ?? null;
+	}
+
+	/**
+	 * @param {string} font
+	 */
+	setFont(font) {
+		this.#context.font = font;
+	}
+
+	/**
+	 * @returns {string | null}
+	 */
+	getFont() {
+		return this.#context?.font ?? null;
+	}
+
+	/**
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {number} width
+	 * @param {number} height
+	 */
+	fillRect(x, y, width, height) {
+		this.#context.fillRect(x, y, width, height);
+	}
+
+	/**
+	 * @param {string} text
+	 * @param {number} x
+	 * @param {number} y
+	 * @param {number} maxWidth
+	 */
+	fillText(text, x, y, maxWidth) {
+		this.#context.fillText(text, x, y, maxWidth);
+	}
+
+	/**
 	 * @returns {HTMLCanvasElement | null}
 	 */
 	getCanvas() {
