@@ -137,7 +137,7 @@ class Game {
 		// figure out fps
 		const sp = (timestamp - this.#lastRenderTime) / 1000;
 		this.#lastRenderTime = timestamp;
-		this.#fps = Math.round(1 / sp);
+		this.#fps = Math.min(Math.round(1 / sp), this.#options?.maxFps);
 
 		// render n stuff
 		this.#renderer.update();
