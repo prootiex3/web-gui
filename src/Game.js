@@ -112,6 +112,14 @@ class Game {
 	}
 
 	/**
+	 * @param {Screen} screen
+	 */
+	setScreen(screen) {
+		if (screen == null) throw new Error("Screen was null.");
+		this.#currentScreen = screen;
+	}
+
+	/**
 	 * @returns {number | null}
 	 */
 	getFPS() {

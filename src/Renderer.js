@@ -38,7 +38,7 @@ class Renderer {
 	 * @param {string} fillStyle
 	 */
 	setFillStyle(fillStyle) {
-		this.#context.fillStyle = fillStyle;
+		this.#context?.fillStyle = fillStyle;
 	}
 
 	/**
@@ -52,7 +52,7 @@ class Renderer {
 	 * @param {string} font
 	 */
 	setFont(font) {
-		this.#context.font = font;
+		this.#context?.font = font;
 	}
 
 	/**
@@ -66,7 +66,7 @@ class Renderer {
 	 * @param {'left' | 'center' | 'right'} alignment
 	 */
 	getTextAlignment(alignment) {
-		this.#context.textAlign = alignment;
+		this.#context?.textAlign = alignment;
 	}
 
 	/**
@@ -83,7 +83,7 @@ class Renderer {
 	 * @param {number} height
 	 */
 	fillRect(x, y, width, height) {
-		this.#context.fillRect(x, y, width, height);
+		this.#context?.fillRect(x, y, width, height);
 	}
 
 	/**
@@ -93,7 +93,7 @@ class Renderer {
 	 * @param {number} maxWidth
 	 */
 	fillText(text, x, y, maxWidth) {
-		this.#context.fillText(text, x, y, maxWidth);
+		this.#context?.fillText(text, x, y, maxWidth);
 	}
 
 	/**
